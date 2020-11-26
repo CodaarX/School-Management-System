@@ -136,7 +136,7 @@ let School = {
     deleteStaff: function(id){
         for(let i = 0; i < School.staff.length; i++){
             if (id === School.staff[i].id){
-                delete School.staff[i]
+                School.staff.splice(i, 1)
                 return School.staff 
             }
         }   
