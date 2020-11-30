@@ -15,15 +15,15 @@ let School = {
 
     // all required methods for dynamic functionali
     registerStudent: function(name, middlename, surname, state, age, gender, sclass, schoolfee){
-        for (let i = 0; i < School.student.length; i++){
-            //ensure that a student is not registered twice
-            for (let i = 0; i < School.student.length; i++){
-                if (name === School.student[i].name && middlename === School.student[i].middlename && surname === School.student[i].surname && state === School.student[i].state && age === School.student[i].age){
-                    console.log("sorry, this student is already registered in our database and is a student of King's college")
-                }
+       
+        //ensure that a student is not registered twice
+        this.student.forEach(function(i){{
+            if (name === School.student[i].name && middlename === School.student[i].middlename && surname === School.student[i].surname && state === School.student[i].state && age === School.student[i].age){
+                console.log("sorry, this student is already registered in our database and is a student of King's college")
             }
         }
-        
+    })
+    
         totalstudent++
         let id = `KingStudent${totalstudent}`
         // create a variable and store an object containting the student information in it.
@@ -37,20 +37,20 @@ let School = {
     },
 
     getStudentbyID: function(id){
-        for(let i = 0; i < School.student.length; i++){
+        this.student.forEach(function(i){
             if (id === School.student[i].id){
                 return School.student[i]
             }
-        }   
+        })   
     },
 
     
     getStudentbyName: function(name){
-        for(let i = 0; i < School.student.length; i++){
+        this.student.forEach(function(i){
             if (name === School.student[i].name){
                 return School.student[i]
             }
-        }
+        })
     },
 
 
@@ -64,22 +64,22 @@ let School = {
     
 
     modifyStudent: function(id, key, value){
-        for(let i = 0; i < School.student.length; i++){
+        this.student.forEach(function(i){
             if (id === School.student[i].id){
                 School.student[i][key] = value
                 return School.student[i] 
             }  
-        }  
+        })  
     },
     
     //use splice
     deleteStudent: function(id){
-        for(let i = 0; i < School.student.length; i++){
+        this.student.forEach(function(i){
             if (id === School.student[i].id){
                 School.student.splice(i, 1)
                 return School.student 
             }
-        }  
+        })  
     },
 
 
@@ -106,52 +106,57 @@ let School = {
     // the methods below itirates over the array and accesses the object properties using an id to carry an operation when a condition is met.
 
     getStaffbyId: function(id){
-        for(let i = 0; i < School.staff.length; i++){
+        this.staff.forEach(function(i){
             if (id === School.staff[i].id){
                 return School.staff[i]
             }
-        }
+        })
     },
 
     
     getStaffbyName: function(name){
-        for(let i = 0; i < School.staff.length; i++){
+        this.staff.forEach(function(i){
             if (name === School.staff[i].name){
                 return School.staff[i]
             }
-        }
+        })
     },
 
     
     modifyStaff: function(id, key, value){
-        for(let i = 0; i < School.staff.length; i++){
+        this.staff.forEach(function(i){
             if (id === School.staff[i].id){
                 School.staff[i][key] = value
                 return School.staff[i] 
             }
-        }   
+        })
     },
 
     // use splice
     deleteStaff: function(id){
-        for(let i = 0; i < School.staff.length; i++){
+        this.staff.forEach(function(i){
             if (id === School.staff[i].id){
                 School.staff.splice(i, 1)
                 return School.staff 
             }
-        }   
+        })   
     },
 
     // This method gets school accounts by adding all the school fees, and all staff salaries separately. then subtracting both from each other.
 
     getSchoolAccount: function(){
-        for (let i = 0; i < School.student.length; i++){
+        this.student.forEach(function(i){
             // console.log(School.student[i].schoolfee)
             studentsFeesRevenue += parseInt(School.student[i].schoolfee)    
-            // console.log(studentsFeesRevenue)
+         })   
+        
+         this.staff.forEach(function(i){
             staffSalaryCost += parseInt(School.staff[i].salary)
-            schoolAccount = studentsFeesRevenue - staffSalaryCost
-         }   return schoolAccount
+            
+         })   
+         
+         schoolAccount = studentsFeesRevenue - staffSalaryCost
+         return schoolAccount
     },
 
 
